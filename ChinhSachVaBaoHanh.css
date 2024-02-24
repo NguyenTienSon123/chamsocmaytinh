@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-areas: 
+    "Header Header Header"
+    "Content Content Content"
+    "SContent SContent SContent"
+    "Footer Footer Footer";
+}
+
+#Header {
+    grid-area: Header;
+    background-color: #2B3499;
+    font-family: 'Courier New';
+    display: grid;
+    grid-template-areas: 
+    "Logo Menu TimKiem"
+    "Banner Banner Banner";
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+/* Logo */
+#Logo {
+    grid-area: Logo;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+}
+
+#Logo a {
+    text-decoration: none;
+}
+
+#Logo h1 {
+    color: #F4A55D;
+} 
+
+/* menu */
+#Menu {
+    grid-area: Menu;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ul-menu {
+    font-family: sans-serif;
+    list-style:none;
+    overflow: hidden;
+}
+
+#Menu a {
+    color: #e8e8e8;
+}
+
+#list-menu {
+    float: left;
+}
+
+#list-menu a, .dropbtn {
+    list-style:none;
+    display: inline-block;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#list-menu a:hover, .dropdown:hover .dropbtn {
+    background-color: #F4A55D;
+}
+
+#list-menu a, .dropdown {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2B3499;
+    min-width:  100px;
+    box-shadow: 0px 8px 16px 0px  black;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#Menu ul li {
+    text-decoration: none;
+}
+
+#TimKiem {
+    grid-area: TimKiem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#TimKiem button {
+    width: 100px;
+    height: 40px;
+    background-color: #F4A55D;
+    border: 0px;
+    border-radius: 5px;
+    color: #545454;
+    font-family: 'Courier New';
+}
+
+#TimKiem button:hover {
+    box-shadow: #e8e8e8 5px 6px 6px;
+}
+
+#Policy {
+    font-family: 'Courier New';
+    font-weight: bold;
+    display: flex;
+    grid-area: Content;
+    text-align: justify;
+    margin: 30px;
+}
+
+#Policy h1{
+    text-align: center;
+}
+
+#Policy h2 {
+    color: #0000CC;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#Policy h3 {
+    color: #990000;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#Policy p {
+    padding-left: 30px;
+} 
+
+#Policy li {
+    padding-left: 50px;
+}
+
+#Content {
+    width: 100vw;
+    background-color: #e8e8e8;
+    display: flex;
+    grid-area: SContent;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#Con {
+    margin: 150px 0px 150px 0px;
+    grid-area: Content;
+    display: grid;
+    grid-template-areas: 
+    "EMAIL LOCATION PHONE"
+    "nhap nhap nhap"
+    "subject subject subject"
+    "message message message"
+    "Nut Nut Nut";
+    width: 1000px;
+    background-color: #ffff;
+    padding: 40px;
+}
+
+#Content h2 {
+    font-family: 'Courier New';
+}
+
+#Content p {
+    font-family: 'Courier New';
+    color:rgb(110, 112, 114);
+}
+
+#Con #icon {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+#Con input {
+    height: 50px;
+    padding-left: 20px;
+}
+
+/*table*/
+th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table tr > td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#HoTen {
+    width: 300px;
+}
+
+.TD {
+    background-color: #F4A55D;
+}
+
+.STT {
+    width: 50px;
+    text-align: center;
+}
+
+.TM {
+    width: 500px;
+}
+
+#nhap {
+    display: flex;
+    grid-area: nhap;
+}
+
+input {
+    border: 1px solid white;
+    border-radius: 15px;
+    background-color: #e8e8e8;
+}
+
+textarea {    
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: #e8e8e8;
+}
+
+#EMAIL {
+    display: flex;
+    margin-top: 30px;
+    grid-area: EMAIL;
+}
+
+#LOCATION {
+    display: flex;
+    margin-top: 30px;
+    grid-area: LOCATION;
+}
+
+#PHONE {
+    display: flex;
+    margin-top: 30px;
+    grid-area: PHONE;
+}
+
+#name {
+    margin-top: 30px;
+    grid-area: name;
+}
+
+#mail {
+    margin-top: 30px;
+    grid-area: mail;
+}
+
+#subject {
+    margin-top: 30px;
+    grid-area: subject;
+}
+
+#message {
+    margin-top: 30px;
+    grid-area: message;
+}
+
+#Con #nuts {
+    grid-area: Nut;
+    margin-top: 30px;
+    margin-right: 30px;
+    width: 200px;
+    height: 60px;
+    background-color: #F4A55D;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Courier New';
+    justify-content: center;
+    align-items: center;
+}
+
+#Con button:hover {
+    box-shadow: #e8e8e8 5px 6px 6px;
+}
+
+#Con {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Footer */
+#Footer {
+    padding: 100px;
+    grid-area: Footer;
+    background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)), url("Dljuh1.png");
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px); /* Độ mờ của nền */
+    background-size: 100% 100%;
+    color: #e8e8e8;
+    background-color: rgb(27, 20, 20);
+}
+
+#FHeader {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#Footer h1 {
+    font-family: 'Courier New';
+}
+
+#FLogo {
+    display: flex;
+}
+
+#FLogo h1 {
+    margin-left: 20px;
+}
+
+#Footer input {
+    margin-top: 20px;
+    background-color: #e8e8e8;
+    width: 150px;
+    border: 0px;
+    padding: 18px;
+}
+
+#ThongTin {
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 90px;
+}
+
+#imgLienLac {
+    display: flex;
+}
+
+#lich {
+    display: flex;
+    width: 160px;
+}
+
+#lich #Gio {
+    margin-left: 10px;
+}
+
+#LienLac {
+    margin-left: 150px;
+}
+
+#OPENING {
+    margin-left: 150px;
+} 
+
+#TheoDoi {
+    margin-left: 150px;
+}
+
+#TheoDoiimg {
+    display: flex;
+}
+
+#TheoDoiimg img {
+    margin-right: 10px;
+}

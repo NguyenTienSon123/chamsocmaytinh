@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#Header {
+    grid-area: Header;
+    background-color: #2B3499;
+    font-family: 'Courier New';
+    display: grid;
+    grid-template-areas: 
+    "Logo Menu TimKiem"
+    "Banner Banner Banner";
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+/* Logo */
+#Logo {
+    grid-area: Logo;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+}
+
+#Logo a {
+    text-decoration: none;
+}
+
+#Logo h1 {
+    color: #F4A55D;
+} 
+#Logo h2 {
+    color: #F4A55D;
+} 
+
+/* Menu */
+#Menu {
+    grid-area: Menu;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ul-menu {
+    font-family: sans-serif;
+    list-style:none;
+    overflow: hidden;
+}
+
+#Menu a {
+    color: #e8e8e8;
+}
+
+#list-menu {
+    float: left;
+}
+
+#list-menu a, .dropbtn {
+    list-style:none;
+    display: inline-block;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#list-menu a:hover, .dropdown:hover .dropbtn {
+    background-color: #F4A55D;
+}
+
+#list-menu a, .dropdown {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2B3499;
+    min-width:  160px;
+    box-shadow: 0px 8px 16px 0px  black;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#Menu ul li {
+    text-decoration: none;
+    width: 110px;
+}
+
+#TimKiem {
+    grid-area: TimKiem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#TimKiem button{
+    width: 100px;
+    height: 40px;
+    background-color: #F4A55D;
+    border: 0px;
+    border-radius: 5px;
+    color: #545454;
+    font-family: 'Courier New';
+}
+
+#TimKiem button:hover {
+    box-shadow: #e8e8e8 5px 6px 6px;
+}
+
