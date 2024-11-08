@@ -25,11 +25,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
     $id = $_POST["id"];
 
     $sql = "DELETE FROM dondat WHERE id = $id";
-
-    if ($conn->query($sql) === TRUE) {
-        $kq = "Xóa đơn đặt thành công!";
-    } else {
-        $kq = "Lỗi: " . $sql . "<br>" . $conn->error;
+    $sql2 = "SELECT * FROM dondat WHERE id = '$id'";
+    $result2 = $conn->query($sql2);
+    $row2 = $result2->fetch_assoc();
+    if($row2["tinhtrang"]==0){
+        if ($conn->query($sql) === TRUE) {
+            header('location:thongtinuser.php?page=orders');
+            $kq = "Xóa đơn đặt thành công!";
+        } else {
+            $kq = "Lỗi: " . $sql . "<br>" . $conn->error;
+        }
+    }else{
+        echo '<script type="text/javascript">
+            alert("Đơn đặt đã được xử lý, bạn không thể xóa/hủy đơn!");
+        </script>';
     }
 }
 
@@ -41,7 +50,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xóa thông tin khách hàng</title>
+    <title>Xóa đơn đặt</title>
     <style>
         body{
             background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)),url("background.jpg");

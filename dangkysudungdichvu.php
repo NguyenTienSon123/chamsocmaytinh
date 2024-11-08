@@ -4,6 +4,11 @@ session_start();
 if(!isset($_SESSION["user"])){
     header("location:trangchu.php");
 }
+if(isset($_SESSION["level"])){
+    if($_SESSION["level"]){
+        header("location:admin.php");
+    }
+}
 include("db_connnection.php");
 $kq="";
 if(isset($_POST["submit"])){
@@ -15,26 +20,36 @@ if(isset($_POST["submit"])){
         $dichvu = $_POST["dichvu"];
     }
 
+    if($dichvuer==""){
+        $sql3 ="SELECT gia, dichvuid FROM dichvu WHERE dichvu LIKE '$dichvu'";
+        $result3 =mysqli_query($conn, $sql3);
+        $row3 = mysqli_fetch_assoc($result3);
+        $gia = $row3["gia"];
+        $dichvuid = $row3["dichvuid"];
+    }
+
     if(!$_POST["date"]){
         $dateer="Bạn hãy nhập ngày đặt";
+
     }else{
         $dateer = "";
         $date = $_POST["date"];   
+        //biến lưu lại date hiện tại
+        $currentDateTime = date("Y-m-d H:i:s");
+        $dateToCheck = $date;
+        //biến kiểm tra date đăng ký có phải chủ nhật không(ngày đóng cửa) qua một biến tạm
+        $dayOfWeek = date('w', strtotime($dateToCheck));
+        //nếu đăng ký ngày nghỉ hoặc thời gian trong quá khứ thì set lại các biến lỗi
+        if($date > $currentDateTime){
+            if($dayOfWeek == 0){
+                $dateer="Đó là ngày Chủ Nhật, chúng tôi không mở cửa!";
+            }
+        }else{
+            $dateer ="Bạn không thể đăng ký ngày này";
+        }
     }
 
-    //biến lưu lại date hiện tại
-    $currentDateTime = date("Y-m-d H:i:s");
-    $dateToCheck = $date;
-    //biến kiểm tra date đăng ký có phải chủ nhật không(ngày đóng cửa) qua một biến tạm
-    $dayOfWeek = date('w', strtotime($dateToCheck));
-    //nếu đăng ký ngày nghỉ hoặc thời gian trong quá khứ thì set lại các biến lỗi
-    if($date > $currentDateTime){
-        if($dayOfWeek == 0){
-            $dateer="Đó là ngày Chủ Nhật, chúng tôi không mở cửa!";
-        }
-    }else{
-        $dateer ="Bạn không thể đăng ký ngày này";
-    }
+    
     //truy vấn tài khoản để lấy họ tên và số điện thoại mã tài khoản
     $user = $_SESSION["user"];
     $sql2 = "SELECT * FROM taikhoan
@@ -50,8 +65,8 @@ if(isset($_POST["submit"])){
     //tương tự đăng ký khi các lỗi rỗng thì bắt đầu xử lý
 
     if($dichvuer== "" && $dateer == ""){
-        $sql = "INSERT INTO dondat (id, hoten, sdt, dichvu, ngaysua, tinhtrang, taikhoanid)
-        VALUES('','$name', '$sdt', '$dichvu', '$date', 0, '$taikhoanid')";
+        $sql = "INSERT INTO dondat (id, hoten, sdt, dichvu, ngaysua, tinhtrang, taikhoanid, dichvuid, gia)
+        VALUES('','$name', '$sdt', '$dichvu', '$date', 0, '$taikhoanid', '$dichvuid', '$gia')";
         $result = mysqli_query($conn, $sql);
         if($result){
             $kq="Đăng ký thành công, hãy đến sửa vào đúng ngày hẹn";
@@ -126,14 +141,16 @@ if(isset($_POST["submit"])){
                 <div>
                     <label>Chọn dịch vụ</label><br>
                     <select type="text" name="dichvu" class="nhap">
-                        <option></option>
-                        <option>Thay Bàn Phím</option>
-                        <option>Thay Màn Hình</option>
-                        <option>Thay Ổ Cứng</option>
-                        <option>Thay Pin</option>
-                        <option>Thay CPU</option>
-                        <option>Thay RAM</option>
-                        <option>Thay Touchpad</option>
+                        <option value=""></option>
+                        <?php
+                        $sql2 = "SELECT * FROM dichvu";
+                        $result2 = $conn->query($sql2);
+                        if ($result2->num_rows > 0){
+                            while ($row2 = $result2->fetch_assoc()) {
+                                echo "<option>" . $row2["dichvu"] . "</option>";
+                            }
+                        }
+                        ?>
                     </select><br>
                     <!-- thẻ p in ra lỗi dưới các inputs -->
                     <p>

@@ -52,7 +52,6 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         h2{
             color: #F4A55D;
@@ -70,7 +69,7 @@ $result = $conn->query($sql);
             height: 100%;
             border: none;
         }
-        form #nut{
+        #nut{
             width: 100px;
             height: 40px;
             background-color: #F4A55D;
@@ -169,7 +168,8 @@ $result = $conn->query($sql);
         echo "<table border='1'>";
         echo "<tr><th>Họ tên</th><th>Số điện thoại</th><th>Địa chỉ</th></tr>";
     
-        //biến row lưu một mảng lưu trữ dữ liệu 1 bản ghi, dùng while để in ra các thông tin lấy được từ row
+        //biến row lưu một mảng lưu trữ dữ liệu 1 bản ghi, 
+        //dùng while để in ra các thông tin lấy được từ row
         while ($row = $result->fetch_assoc()) {
     
             echo "<tr>";
@@ -184,6 +184,7 @@ $result = $conn->query($sql);
         echo "Không có khách hàng nào.";
     }
     ?>
+    <a href="indstaikhoan.php"><button style="margin-top:25px;" id="nut" name="ep" type="submit">Excel</button></a>
     <p><br></p>
 </body>
 </html>

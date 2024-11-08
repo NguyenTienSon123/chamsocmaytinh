@@ -127,7 +127,7 @@ $conn->close();
     </form>
     <?php
     if(isset($_POST['ql'])){
-        header('location:trangchu.php');
+        header('location:thongtinuser.php?page=account');
     }
     ?>
 </body>

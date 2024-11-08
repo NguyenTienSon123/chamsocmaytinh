@@ -18,7 +18,6 @@ $row1 = mysqli_fetch_array($result1);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         h2{
             color: #F4A55D;
@@ -59,14 +58,16 @@ $row1 = mysqli_fetch_array($result1);
                 <th><label>Tên dich vụ</label></th>
                 <td>
                     <select type="text" name="tendv" class="nhap">
-                        <option></option>
-                        <option>Thay Bàn Phím</option>
-                        <option>Thay Màn Hình</option>
-                        <option>Thay Ổ Cứng</option>
-                        <option>Thay Pin</option>
-                        <option>Thay CPU</option>
-                        <option>Thay RAM</option>
-                        <option>Thay Touchpad</option>
+                        <option value=""></option>
+                        <?php
+                        $sql2 = "SELECT * FROM dichvu";
+                        $result2 = $conn->query($sql2);
+                        if ($result2->num_rows > 0){
+                            while ($row2 = $result2->fetch_assoc()) {
+                                echo "<option>" . $row2["dichvu"] . "</option>";
+                            }
+                        }
+                        ?>
                     </select>
                 </td>
             </tr>
@@ -101,7 +102,8 @@ $row1 = mysqli_fetch_array($result1);
             // Kiểm tra nếu cả hai biến đều có giá trị
             if ($tendv !== "" && $ngaydat !== "") {
                 // Thực hiện công việc khi chỉ có biến $tendv và $ngaydat có giá trị
-                $sql = "SELECT * FROM dondat WHERE taikhoanid = '$row1[0]' AND dichvu = '$tendv' AND ngaysua = '$ngaydat'";
+                $sql = "SELECT * FROM dondat WHERE taikhoanid = '$row1[0]' 
+                AND dichvu = '$tendv' AND ngaysua = '$ngaydat'";
 
             } elseif ($tendv !== "") {
                 // Thực hiện công việc khi chỉ có biến $tendv có giá trị
@@ -119,7 +121,7 @@ $row1 = mysqli_fetch_array($result1);
 
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            echo "<tr><th>Mã đơn đặt</th><th>Họ tên</th><th>Số điện thoại</th><th>Dịch vụ</th><th>Ngày hẹn</th><th>Tình trạng</th><th></th></tr>";
+            echo "<tr><th>Mã đơn đặt</th><th>Họ tên</th><th>Số điện thoại</th><th>Dịch vụ</th><th>Ngày hẹn</th><th>Giá</th><th>Tình trạng</th><th></th></tr>";
 
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -128,6 +130,7 @@ $row1 = mysqli_fetch_array($result1);
                 echo "<td>" . $row["sdt"] . "</td>";
                 echo "<td>" . $row["dichvu"] . "</td>";
                 echo "<td>" . $row["ngaysua"] . "</td>";
+                echo "<td>" . $row["gia"] . "</td>";
                 if($row["tinhtrang"]==0){
                     $tinhtrang ="Chưa xử lý";
                     echo "<td>" . $tinhtrang . "</td>";

@@ -1,5 +1,12 @@
 <?php
 session_start();
+include("db_connnection.php");
+//ngăn không cho admin vào trang này
+if(isset($_SESSION["level"])){
+    if($_SESSION["level"]){
+        header("location:admin.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +14,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chính Sách Và Bảo Hành</title>
-    <link rel="stylesheet" href="ChinhSachVaBaoHanh.css">
+    <link rel="stylesheet" href="BaoHanh.css">
 </head>
 <body>
     <div id="Header">
@@ -19,18 +26,7 @@ session_start();
             <ul class="ul-menu">
                 <li id="list-menu" class="dropdown "><a href="trangchu.php">Trang Chủ</a></li>
                 <li id="list-menu" class="dropdown "><a href="gioithieu.php">Giới Thiệu</a></li>
-                <li id="list-menu" class="dropdown ">
-                    <a class="dropbtn" href="">Dịch Vụ</a>
-                    <div class="dropdown-content">
-                    <a href="TabThayBanPhim.php">Thay Bàn Phím</a>
-                        <a href="TabThayManHinh.php">Thay Màn Hình</a>
-                        <a href="TabThayOCung.php">Thay Ổ Cứng</a>
-                        <a href="TabThayPin.php">Thay Pin</a>
-                        <a href="TabThayCPU.php">Thay CPU</a>
-                        <a href="TabThayRam.php">Thay RAM</a>
-                        <a href="TabThayTouchPad.php">Thay Touchpad</a>
-                    </div>
-                </li>
+                <li id="list-menu" class="dropdown "><a class="dropbtn" href="dichvu.php">Dịch Vụ</a></li>
                 <li id="list-menu" class="dropdown "></liid><a href="BaoHanh.php">Bảo Hành</a></li>
             </ul>
         </div>
@@ -100,7 +96,7 @@ session_start();
 
             <h2>IV. Quy định đổi mới sản phẩm</h2>
             <div>
-                <p>-  Quý khách sử dụng sản phẩm mua tại Chamsoclaptop.vn trong 07 ngày đầu tiên, nếu bị lỗi kỷ thuật hoặc lỗi do Nhà sản xuất sẽ được đổi mới với điều kiện: 
+                <p>-  Quý khách sử dụng sản phẩm mua tại crazy Company trong 07 ngày đầu tiên, nếu bị lỗi kỷ thuật hoặc lỗi do Nhà sản xuất sẽ được đổi mới với điều kiện: 
                     <li>Sản phẩm không rơi vào Trường hợp II - Các trường hợp không được bảo hành.</li>
                     <li>Sản phẩm còn trong tình trạng như mới (hàng phải còn đầy đủ hộp và đúng số serial sản phẩm, các phụ kiện đi kèm và phiếu xuất hàng).</li>
                 </p>

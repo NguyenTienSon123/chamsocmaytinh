@@ -19,18 +19,7 @@ session_start();
             <ul class="ul-menu">
                 <li id="list-menu" class="dropdown "><a href="trangchu.php">Trang Chủ</a></li>
                 <li id="list-menu" class="dropdown "><a href="gioithieu.php">Giới Thiệu</a></li>
-                <li id="list-menu" class="dropdown ">
-                    <a class="dropbtn" href="">Dịch Vụ</a>
-                    <div class="dropdown-content">
-                        <a href="TabThayBanPhim.php">Thay Bàn Phím</a>
-                        <a href="TabThayManHinh.php">Thay Màn Hình</a>
-                        <a href="TabThayOCung.php">Thay Ổ Cứng</a>
-                        <a href="TabThayPin.php">Thay Pin</a>
-                        <a href="TabThayCPU.php">Thay CPU</a>
-                        <a href="TabThayRam.php">Thay RAM</a>
-                        <a href="TabThayTouchPad.php">Thay Touchpad</a>
-                    </div>
-                </li>
+                <li id="list-menu" class="dropdown "><a class="dropbtn" href="dichvu.php">Dịch Vụ</a></li>
                 <li id="list-menu" class="dropdown "></liid><a href="BaoHanh.php">Bảo Hành</a></li>
             </ul>
         </div>
@@ -157,7 +146,7 @@ session_start();
             </div>
         </div>
     </div>
-    <div id="Footer">
+    <div id="Footer" style="font-family: 'Courier New', Courier, monospace;">
         <div id="ThongTin">
             <div id="MoTa">
                 <div id="FLogo">

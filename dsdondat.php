@@ -1,7 +1,4 @@
 <?php
-if(!isset($_SESSION["user"])){
-    header("location:dangnhap.php");
-}
 include("db_connnection.php");
 
 $tenkh="";
@@ -65,6 +62,10 @@ if(isset($_POST["loc"])){
     }
 }
 
+if(!isset($_SESSION["user"])){
+    header("location:dangnhap.php");
+}
+
 $result = $conn->query($sql);
 ?>
 
@@ -73,7 +74,6 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         h2{
             color: #F4A55D;
@@ -94,7 +94,7 @@ $result = $conn->query($sql);
             height: 100%;
             border: none;
         }
-        form #nut{
+        #nut{
             width: 100px;
             height: 40px;
             background-color: #F4A55D;
@@ -118,19 +118,21 @@ $result = $conn->query($sql);
                 <th><label>Tên dich vụ</label></th>
                 <td>
                     <select type="text" name="tendv" class="nhap">
-                        <option></option>
-                        <option>Thay Bàn Phím</option>
-                        <option>Thay Màn Hình</option>
-                        <option>Thay Ổ Cứng</option>
-                        <option>Thay Pin</option>
-                        <option>Thay CPU</option>
-                        <option>Thay RAM</option>
-                        <option>Thay Touchpad</option>
+                        <option value=""></option>
+                        <?php
+                        $sql2 = "SELECT * FROM dichvu";
+                        $result2 = $conn->query($sql2);
+                        if ($result2->num_rows > 0){
+                            while ($row2 = $result2->fetch_assoc()) {
+                                echo "<option>" . $row2["dichvu"] . "</option>";
+                            }
+                        }
+                        ?>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th><label>ngày đặt</label></th>
+                <th><label>Ngày đặt</label></th>
                 <td><input type="date" name="ngaydat"></td>
             </tr>
         </table>
@@ -139,9 +141,10 @@ $result = $conn->query($sql);
     <?php
     if ($result->num_rows > 0) {
         echo "<table border='1'>";
-        echo "<tr><th>Họ tên khách hàng</th><th>Số điện thoại</th><th>Dich vụ</th><th>Ngày hẹn</th><th>Tình trạng</th></tr>";
-    
-        //biến row lưu một mảng lưu trữ dữ liệu 1 bản ghi, dùng while để in ra các thông tin lấy được từ row
+        echo "<tr><th>Họ tên khách hàng</th><th>Số điện thoại</th>".
+        "<th>Dich vụ</th><th>Ngày hẹn</th><th>Giá</th><th>Tình trạng</th></tr>";
+        //biến row lưu một mảng lưu trữ dữ liệu 1 bản ghi, 
+        //dùng while để in ra các thông tin lấy được từ row
         while ($row = $result->fetch_assoc()) {
     
             echo "<tr>";
@@ -149,20 +152,24 @@ $result = $conn->query($sql);
             echo "<td>" . $row["sdt"] . "</td>";
             echo "<td>" . $row["dichvu"] . "</td>";
             echo "<td>" . $row["ngaysua"] . "</td>";
+            echo "<td>" . $row["gia"] . "</td>";
             if($row["tinhtrang"]==0){
                 $tinhtrang = "Chưa xử lý";
+                echo "<td>".$tinhtrang . " | <a href='edit_oder.php?id=" . $row["id"] . "'>Sửa</a></td>";
             }else{
                 $tinhtrang = "Đã xử lý";
+                echo "<td>".$tinhtrang . "</td>";
             }
-            echo "<td>".$tinhtrang . " | <a href='edit_oder.php?id=" . $row["id"] . "'>Sửa</a></td>";
             echo "</tr>";
         }
-    
         echo "</table>";
     } else {
         echo "Không tìm thấy đơn nào.";
     }
+
+    
     ?>
+    <a href="indsdondat.php"><button style="margin-top:25px;" id="nut" name="ep" type="submit">Excel</button></a>
     <p><br></p>
 </body>
 </html>

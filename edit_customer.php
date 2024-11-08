@@ -34,6 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
     $sql = "UPDATE taikhoan SET hoten = '$name', sdt = '$sdt', thanhpho = '$city' WHERE taikhoanid = $id";
 
     if ($conn->query($sql) == TRUE) {
+        $sql2 = "SELECT * FROM dondat WHERE taikhoanid = $id";
+        $result2 = $conn->query($sql2);
+        if ($result2->num_rows > 0) {
+            while ($row2 = $result2->fetch_assoc()) {
+                $dondatid = $row2["id"] ;
+                $sql3 = "UPDATE dondat SET hoten = '$name', sdt = '$sdt' WHERE id = '$dondatid'";
+                $result3 = $conn->query($sql3);
+            }
+        }
         $kq="Cập nhật thông tin khách hàng thành công!";
     } else {
         $kq = "Lỗi: " . $sql . "<br>" . $conn->error;

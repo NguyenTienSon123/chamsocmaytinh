@@ -23,7 +23,7 @@ if(!isset($_SESSION["user"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="thongtinuser.css">
-    <title>Cá nhân</title>
+    <title>Quản trị viên</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,12 +33,19 @@ if(!isset($_SESSION["user"])){
         }
 
         #sidebar {
+            height: 100vh;
             background-color:#ddd;
             padding: 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
             box-sizing: border-box;
+            overflow-y: auto; /* Cho phép cuộn nếu nội dung dài hơn */
         }
         #content {
+            
             flex: 1;
+            margin-left: 20%;
             padding: 47px;
             box-sizing: border-box;
         }
@@ -78,6 +85,7 @@ if(!isset($_SESSION["user"])){
         #botent{
             display: flex;
             height: 100vh;
+            width: 100vw;
         }
         #sidebar li{
             padding: 7px
@@ -105,7 +113,7 @@ if(!isset($_SESSION["user"])){
                     <a href="?page=dsnguoidung">
                     <img style="width:20px; height:20px; padding-right:5px"
                     src="iconnguoidung.webp">
-                    Quản lý người dùng</a>
+                    Quản lý khách hàng</a>
                 </li>
                 <li>
                     <a href="?page=dsdondat">
@@ -114,7 +122,13 @@ if(!isset($_SESSION["user"])){
                     Quản lý đơn đặt</a>
                 </li>
                 <li>
-                    <a href="?page=">
+                    <a href="?page=doanhthu">
+                    <img style="width:20px; height:20px;padding-right:5px"
+                    src="dollar.png">
+                    Quản lý doanh thu</a>
+                </li>
+                <li>
+                    <a href="?page=dsdichvu">
                     <img style="width:20px; height:20px; padding-right:5px"
                     src="dichvu.png">
                     Quản lý dịch vụ</a>
@@ -133,7 +147,6 @@ if(!isset($_SESSION["user"])){
             // Xử lý nội dung tương ứng với lựa chọn từ menu
             if (isset($_GET['page'])) {
                 $page = $_GET['page'];
-
                 switch ($page) {
                     case 'dsnguoidung':
                         include('dsnguoidung.php');
@@ -143,6 +156,12 @@ if(!isset($_SESSION["user"])){
                         break;
                     case 'logout':
                         include('logout.php');
+                        break;
+                    case 'dsdichvu':
+                        include('dsdichvu.php');
+                        break;
+                    case 'doanhthu':
+                        include('doanhthu.php');
                         break;
                     default:
                         echo 'Chưa có bản cập nhật cho trang này.';

@@ -23,26 +23,24 @@ if(isset($_POST["submit"])){
         $result = $conn->query($sql);
         if ($result->num_rows > 0){
             $row = $result->fetch_assoc();
-            if($row["tendangnhap"] != null && $row["matkhau"]!= null){
-                if($row["tendangnhap"] == $user && $row["matkhau"] == $pass){
-                    if($row["level"] == 0){
-                        $_SESSION["user"] = $user;
-                        $_SESSION["level"] = $row["level"];
-                        header("location:trangchu.php");
-                    }else{
-                        $_SESSION["level"] = $row["level"];
-                        $_SESSION["user"] = $user;
-                        header("location:admin.php");
-                    }
+            if($row["tendangnhap"] == $user && $row["matkhau"] == $pass){
+                if($row["level"] == 0){
+                    $_SESSION["user"] = $user;
+                    $_SESSION["level"] = $row["level"];
+                    header("location:trangchu.php");
                 }else{
-                    $kq = "Tên tài khoản hoặc mật khẩu không đúng";
+                    $_SESSION["level"] = $row["level"];
+                    $_SESSION["user"] = $user;
+                    header("location:admin.php");
                 }
             }else{
-                $kq = "Tên tài khoản hoặc mật khẩu không đúng";
+                $kq = "Mật khẩu không đúng";
             }
         }else{
-            $kq = "Lỗi truy vấn: " . mysqli_error($connection);
+            $kq = "Tài khoản này không tồn tại";
         }
+    }else{
+        $kq = "Bạn hãy điền đủ các thông tin trước";
     }
 }
 ?>
@@ -155,7 +153,7 @@ if(isset($_POST["submit"])){
             <br>
             <div id="bung">
                 <input class="button" type="submit" name="submit" value="Đăng nhập">
-                <p>
+                <p style="color: red;">
                     <?php
                     if(isset($_POST["submit"])){
                         if($kq){

@@ -12,6 +12,7 @@
     "Logo Menu TimKiem"
     "Banner Banner Banner";
     grid-template-columns: 1fr 2fr 1fr;
+
 }
 
 /* Logo */
@@ -20,6 +21,7 @@
     display: flex;
     justify-content : center;
     align-items: center;
+    
 }
 
 #Logo a {
